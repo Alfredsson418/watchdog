@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 struct memory_t {
-    unsigned long total;
-    unsigned long used;
+	unsigned long total;
+	unsigned long used;
 };
 
 struct memory_t *get_mem();

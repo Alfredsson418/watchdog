@@ -1,3 +1,7 @@
+build
+client
+server
+
 # Prerequisites
 *.d
 

@@ -30,8 +30,8 @@ OBJFILES = $(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCFILES))
 debug: CFLAGS = $(DEBUG_CFLAGS)
 debug: $(OBJFILES)
 	@echo "Building Client and Server in debug mode"
-	$(CC) $(CFLAGS) $(SERVER_PATH) $^ -o $(SERVER_NAME) $(LDFLAGS)
-	$(CC) $(CFLAGS) $(CLIENT_PATH) $^ -o $(CLIENT_NAME) $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(SERVER_PATH) $^ -o $(SERVER_NAME) $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(CLIENT_PATH) $^ -o $(CLIENT_NAME) $(LDFLAGS)
 	@echo "Done!"
 
 

@@ -1,0 +1,10 @@
+---
+BasedOnStyle: LLVM
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+AlignConsecutiveMacros: Consecutive
+AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: true
+AlignArrayOfStructures: Right
+---

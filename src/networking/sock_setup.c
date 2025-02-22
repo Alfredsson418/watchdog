@@ -1,35 +1,35 @@
 #include "../../include/networking/sock_setup.h"
-#include <ifaddrs.h>
-#include <stdio.h>
-
-int get_server_ip() {
-    struct ifaddrs *ifaddr;
-
-    if (getifaddrs(&ifaddr) < 0) {
-        perror("ifaddrs");
-        return -1;
-    }
-
-    for (; ifaddr->ifa_next == NULL; ifaddr = ifaddr->ifa_next) {
-        if (ifaddr->ifa_addr == NULL) {
-            continue;
-        }
-        if (ifaddr->ifa_addr->sa_family != INET_FAMILY) {
-            continue;
-        }
-    }
-
-    return 1;
-}
 
 int server_sock_setup() {
-    int sock = socket(INET_FAMILY, SOCK_DGRAM, IPPROTO_UDP);
+	int						sd = socket(INET_FAMILY, SOCK_DGRAM, IPPROTO_UDP);
+	struct sockaddr_storage server_addr;
 
-    return sock;
+	if (INET_FAMILY == AF_INET) {
+		struct sockaddr_in *temp = (struct sockaddr_in *)&server_addr;
+
+		inet_pton(AF_INET, INADDR_ANY, &temp->sin_addr);
+		temp->sin_port	 = htons(SERVER_PORT);
+		temp->sin_family = INET_FAMILY;
+	} else if (INET_FAMILY == AF_INET6) {
+		struct sockaddr_in6 *temp = (struct sockaddr_in6 *)&server_addr;
+
+		inet_pton(AF_INET6, INADDR_ANY, &temp->sin6_addr);
+		temp->sin6_port	  = htons(SERVER_PORT);
+		temp->sin6_family = INET_FAMILY;
+	}
+
+	if (bind(sd, (struct sockaddr *)&server_addr,
+			 INET_FAMILY == AF_INET ? sizeof(struct sockaddr_in)
+									: sizeof(struct sockaddr_in6)) < 0) {
+		perror("Bind failed");
+		return 0;
+	}
+
+	return sd;
 }
 
 int client_sock_setup() {
-    int sock = socket(INET_FAMILY, SOCK_DGRAM, IPPROTO_UDP);
+	int sock = socket(INET_FAMILY, SOCK_DGRAM, IPPROTO_UDP);
 
-    return sock;
+	return sock;
 }
