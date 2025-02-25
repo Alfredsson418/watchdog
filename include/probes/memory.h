@@ -1,15 +1,17 @@
 #pragma once
 
-#include <stdlib.h>
 #include <unistd.h>
 
-struct memory_t {
-	unsigned long total;
-	unsigned long used;
+#include "probes.h"
+
+class ProbeMemoryFree : public Probe {
+
+  public:
+	ProbeMemoryFree();
 };
 
-struct memory_t *get_mem();
+class ProbeMemoryTotal : public Probe {
 
-long get_memsize();
-
-long get_mem_used();
+  public:
+	ProbeMemoryTotal();
+};

@@ -1,12 +1,12 @@
 # Set compiler
-CC = gcc
+CC = g++
 
 # Set name for the executable
 SERVER_NAME = server
-SERVER_PATH = server.c
+SERVER_PATH = server.cpp
 
 CLIENT_NAME = client
-CLIENT_PATH = client.c
+CLIENT_PATH = client.cpp
 
 
 # Directories
@@ -16,13 +16,13 @@ SRC = src
 # Flags for compiling
 DEBUG_CFLAGS = -Wall -g
 RELEASE_CFLAGS =
-LDFLAGS = -lpcap -pthread
+LDFLAGS =
 
 # Get all the source files in the SRC directory and its subdirectories
-SRCFILES = $(shell find $(SRC) -name '*.c')
+SRCFILES = $(shell find $(SRC) -name '*.cpp')
 
 # Generate object file names from source file names
-OBJFILES = $(patsubst $(SRC)/%.c, $(BUILD)/%.o, $(SRCFILES))
+OBJFILES = $(patsubst $(SRC)/%.cpp, $(BUILD)/%.o, $(SRCFILES))
 
 .PHONY: debug release clean
 
@@ -50,7 +50,7 @@ release:
 
 
 # Rule to compile each source file into an object file
-$(BUILD)/%.o: $(SRC)/%.c
+$(BUILD)/%.o: $(SRC)/%.cpp
 	@mkdir -p $(@D)
 	@echo "Compiling $<"
 	@$(CC) $(CFLAGS) -c -o $@ $<
