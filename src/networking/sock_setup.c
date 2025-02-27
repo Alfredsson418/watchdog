@@ -8,7 +8,7 @@ int server_sock_setup() {
 	if (INET_FAMILY == AF_INET) {
 		struct sockaddr_in *temp = (struct sockaddr_in *)&server_addr;
 
-		inet_pton(AF_INET, "0.0.0.0", &temp->sin_addr);
+		inet_pton(AF_INET, INADDR_ANY, &temp->sin_addr);
 		temp->sin_port	 = htons(SERVER_PORT);
 		temp->sin_family = INET_FAMILY;
 	} else if (INET_FAMILY == AF_INET6) {
