@@ -16,7 +16,7 @@ SRC = src
 # Flags for compiling
 DEBUG_CFLAGS = -Wall -g
 RELEASE_CFLAGS =
-LDFLAGS =
+LDFLAGS = -lcjson
 
 # Get all the source files in the SRC directory and its subdirectories
 SRCFILES = $(shell find $(SRC) -name '*.c')

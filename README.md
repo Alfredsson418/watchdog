@@ -11,3 +11,6 @@
 - Memory Usage (incl swap)
 - Network usage (Connected IPs, Open ports, etc)
 - And more
+
+# Dependecy
+- cJSON
